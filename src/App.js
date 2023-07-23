@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import { decrementExperience, incrementExperience } from './redux/actions';
 
 function App() {
+  const state = useSelector(state => state.amount)
+  const dispatch = useDispatch()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Welcome to Learners world </h1>
+      <div className='experience'>
+        <button className='btn' onClick={()=>dispatch(decrementExperience(1))}>-</button>
+        <p>{state} month</p>
+        <button className='btn' onClick={()=>dispatch(incrementExperience(1))}>+</button>
+      </div>
+    </div>
     </div>
   );
 }
