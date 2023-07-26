@@ -13,7 +13,7 @@ export const productSlice = createSlice({
         },
         removeItemFromCart:(state,action) =>{
             console.log("Inside remove from cart ", action.payload);
-            let filteredItems = state.cartItems.filter((item)=> item !== action.payload)
+            let filteredItems = state.cartItems.filter((item)=> item.id !== action.payload.id)
             state.cartItems = [...filteredItems]
         }
     }

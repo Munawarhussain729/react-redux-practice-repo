@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
 import axios from "axios"
-import Product from '../Product'
+import { Button } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import ProductDisplay from './ProductDisplay'
+import Cart from '../Cart/Cart'
 
 function Home() {
     const [products, setProducts] = useState([])
-
+    const Items = useSelector((state) => state.ProductReducer.cartItems)
+    const [showCart, setShowCart] = useState(false)
     useEffect(() => {
         async function fetchProducts() {
             try {
@@ -23,14 +26,16 @@ function Home() {
     }, [])
     return (
         <div className='d-flex flex-column justify-content-center align-items-center my-4'>
-            <h1>Welcome to Learners Store</h1>
-            <Container className='d-flex flex-wrap mt-4'>
-                {products.map((item) => {
-                    return (
-                        <Product item={item} key={item.title}/>
-                    )
-                })}
-            </Container>
+            <div className='d-flex justify-content-between w-75' >
+                <h1 onClick={()=>setShowCart(false)} style={{cursor:"pointer"}}>Welcome to Learners Store</h1>
+                {
+                    Items?.length > 0 ? <Button onClick={()=>setShowCart(!showCart)}>Cart {Items.length}</Button> : <div></div>
+                }
+            </div>
+            {
+                showCart ? (<Cart />) : (<ProductDisplay products={products} />)
+            }
+
         </div>
     )
 }
