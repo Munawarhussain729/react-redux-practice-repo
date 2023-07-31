@@ -9,6 +9,7 @@ function Cart() {
     return (
         <Container className='d-flex flex-column justify-content-center align-items-center'>
             <h3>Your Cart Items are: </h3>
+            <h4>See your cart items here</h4>
             <div>
                 {Items.map((item) => {
                     return (
