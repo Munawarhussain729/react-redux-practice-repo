@@ -3,7 +3,8 @@ import axios from "axios"
 import { Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import ProductDisplay from './ProductDisplay'
-import Cart from '../Cart/Cart'
+import { Link } from "react-router-dom";
+// import Cart from '../Cart/Cart'
 
 function Home() {
     const [products, setProducts] = useState([])
@@ -24,16 +25,24 @@ function Home() {
         fetchProducts();
 
     }, [])
+    const cartstyle={
+        color:"white"
+    }
     return (
         <div className='d-flex flex-column justify-content-center align-items-center my-4'>
             <div className='d-flex justify-content-between w-75' >
                 <h1 onClick={()=>setShowCart(false)} style={{cursor:"pointer"}}>Welcome to Learners Store</h1>
                 {
-                    Items?.length > 0 ? <Button onClick={()=>setShowCart(!showCart)}>Cart {Items.length}</Button> : <div></div>
+                    // Items?.length > 0 ? <Button onClick={()=>setShowCart(!showCart)}>Cart {Items.length}</Button> : <div></div>
+                    <Button><Link to="/cart" style={cartstyle}>Cart {Items.length}</Link></Button>
+                    
+
+                    //cart button
                 }
             </div>
             {
-                showCart ? (<Cart />) : (<ProductDisplay products={products} />)
+                // showCart ? (<Cart />) : (<ProductDisplay products={products} />)
+                <ProductDisplay products={products} />
             }
 
         </div>
